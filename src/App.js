@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Viewer, Cartesian3, UrlTemplateImageryProvider, WebMercatorTilingScheme, ArcGisMapServerImageryProvider } from "cesium"
+import { Viewer, Cartesian3, UrlTemplateImageryProvider, WebMercatorTilingScheme, ArcGisMapServerImageryProvider, KmlDataSource } from "cesium"
 import './App.css'
 
 const App = ()=> {
@@ -31,6 +31,11 @@ const App = ()=> {
         credit :"底图"
       },2)*/
     })
+    viewer.dataSources.add(KmlDataSource.load('/Yarlung .kmz',{
+        camera: viewer.scene.camera,
+        canvas: viewer.scene.canvas
+      })
+    );
 
     viewer._cesiumWidget._creditContainer.style.display = "none";
     viewer.imageryLayers.addImageryProvider(new ArcGisMapServerImageryProvider({
